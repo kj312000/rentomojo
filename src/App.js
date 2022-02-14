@@ -24,7 +24,7 @@ function App() {
     <div className='App'>
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
     <GlobalStyles />
-    <button className='toggle' onClick={toggleTheme}>Toggle theme</button>
+    <button className='toggle' onClick={toggleTheme}>{theme==="light"?"Dark":"Light"}</button>
     <UserState>
     <BrowserRouter>
     <div className='Container'>

@@ -4,18 +4,6 @@ import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom'
 import Context from "../context/Context";
 
-const elementStyle ={
-  border:'solid',
-  borderRadius:'10px',
-  position:'relative',
-  left:'30%',
-  height:'3vh',
-  width:'50%',
-  marginTop:'5vh',
-  marginBottom:'10vh',
-  padding:'1rem'
-}
-
 
 function Posts() {
   const response = useContext(Context)
@@ -40,7 +28,7 @@ function Posts() {
       {Loading?
             <h1>Loading...</h1>:
             <div className='sub_post'>
-              <input type="text" placeholder="Search" style={elementStyle} onChange={(e)=>searchSpace(e)} />
+              <input type="text" placeholder="Search" className='elementStyle' onChange={(e)=>searchSpace(e)} />
               {data.filter((res)=>{
                 if(state.search == null)
                     return res

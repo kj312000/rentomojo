@@ -3,19 +3,6 @@ import axios from "axios";
 import Context from "../context/Context";
 import {  Link } from "react-router-dom";
 
-
-const elementStyle ={
-  border:'solid',
-  borderRadius:'10px',
-  position:'relative',
-  left:'30%',
-  height:'3vh',
-  width:'20vw',
-  marginTop:'5vh',
-  marginBottom:'10vh',
-  padding:'1rem'
-}
-
 function Home() {
   const data = useContext(Context)
   const {User , setUser} =data
@@ -40,7 +27,7 @@ function Home() {
     <div className='Home'>
         {Loading?<h1>Loading....</h1>:
         <div>
-        <input type="text" placeholder="Search" style={elementStyle} onChange={(e)=>searchSpace(e)} />
+        <input type="text" placeholder="Search" className="elementStyle" onChange={(e)=>searchSpace(e)} />
         <table><tbody>
         <tr>
           <th>Sr.No</th>
