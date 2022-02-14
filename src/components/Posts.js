@@ -1,7 +1,8 @@
 import axios from 'axios';
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom'
+import Context from "../context/Context";
 
 const elementStyle ={
   border:'solid',
@@ -16,14 +17,16 @@ const elementStyle ={
 }
 
 
-function Posts({data , handleState }) {
+function Posts() {
+  const response = useContext(Context)
+  const {data , setData} = response
   const {user_id} = useParams()
   const [Loading, setLoading] = useState(true)
   const [state, setState] = useState([{}])
 
     useEffect(() => {
       axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${user_id}&skip=0&limit=10`)
-      .then((res)=>{handleState(res.data);setLoading(false)})
+      .then((res)=>{setData(res.data);setLoading(false)})
       // eslint-disable-next-line
     },[user_id])
 

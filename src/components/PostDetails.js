@@ -1,9 +1,12 @@
 import axios from 'axios';
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import {  useParams,useNavigate } from 'react-router-dom';
 import Comments from './Comments';
+import Context from "../context/Context";
 
-function PostDetails({data , setData}) {
+function PostDetails() {
+  const response = useContext(Context)
+  const {data , setData} = response
   const navigate = useNavigate()
   const {user_id , id} = useParams()
   const [ShowComments, setShowComments] = useState(false)
@@ -24,9 +27,11 @@ function PostDetails({data , setData}) {
           setData(data.filter((user)=>{
             return `${user.id}` !== id;
           }))
+          alert(`Deleted post No : ${id}`)
         }
       })
       navigate(`/posts/${user_id}`)
+      
     }
 
 

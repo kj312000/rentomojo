@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState,useEffect,useContext } from "react";
+import axios from "axios";
+import Context from "../context/Context";
 import {  Link } from "react-router-dom";
+
 
 const elementStyle ={
   border:'solid',
@@ -13,16 +16,26 @@ const elementStyle ={
   padding:'1rem'
 }
 
-
-
-function Home({User , Loading}) {
+function Home() {
+  const data = useContext(Context)
+  const {User , setUser} =data
+  const [Loading, setLoading] = useState(true)
   const [state, setState] = useState([{}])
   const searchSpace=(event)=>{
     let keyword = event.target.value;
     setState({search:keyword})
   }
-  
+  useEffect(() => {
+    loadUser()// eslint-disable-next-line
+  }, [])
 
+  const loadUser = async()=>{
+    const result = await axios.get("https://jsonplaceholder.typicode.com/users");
+      const res = await result.data
+      setUser(res)
+      setLoading(false)
+      }
+  
   return (
     <div className='Home'>
         {Loading?<h1>Loading....</h1>:
@@ -41,6 +54,7 @@ function Home({User , Loading}) {
                         return res
                     else if(name.toLowerCase().includes(state.search.toLowerCase())||company.name.toLowerCase().includes(state.search.toLowerCase()))
                         return res
+                    else return false
                     }).map((e,index)=>{
                         const {name , company} = e
                     return(
